@@ -4,6 +4,10 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.ext.declarative import declared_attr, DeclarativeMeta
 
+from athanor.utils import pluralize
+
+import re
+
 Session = scoped_session(sessionmaker())
 
 class BaseDeclarativeMeta(DeclarativeMeta):
@@ -26,6 +30,20 @@ class BaseDeclarativeMeta(DeclarativeMeta):
 class BaseModel(object):
 
     objects = Session.query_property()
+    
+    # Courtesy of http://techspot.zzzeek.org/files/2011/magic.py
+    @declared_attr
+    def __tablename__(cls):
+        """Convert CamelCase class name to underscores_between_words 
+        table name."""
+        name = cls.__name__
+
+        underscored = (
+            name[0].lower() + 
+            re.sub(r'([A-Z])', lambda m:"_" + m.group(0).lower(), name[1:])
+        )
+
+        return pluralize(underscored)
 
     @property
     def columns(self):
@@ -73,7 +91,6 @@ class BaseModel(object):
         '''
         Returns a dict of attributes of a mapped instance
         '''
-
 
         cols = self.columns
 
