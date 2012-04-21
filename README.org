@@ -102,11 +102,14 @@
 ** Mixins
 *** StampedMixin
 **** Description
-     Add StampedMixin to a mapped class to add created_on and
      modified_on columns to a table. These columns will updated as needed
+     Add StampedMixin to a mapped class to add created_on and
 
 *** TrackedMixin
-   
+**** Description
+     TrackedMixin adds created_by and modified_by columns to a table
+     that relate to a User object.  Use the .touch(user) method to
+     update modified_by.
 
 ** EAV
 

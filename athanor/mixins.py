@@ -33,3 +33,5 @@ class TrackedMixin(object):
             primaryjoin='%s.modify_user_id == User.user_id' % cls.__name__
         )
 
+    def touch(self, user):
+        self.modified_by = user
