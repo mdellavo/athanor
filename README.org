@@ -10,8 +10,28 @@
   See Also - http://en.wikipedia.org/wiki/Athanor
 
 ** Examples
+   #+BEGIN_SRC python
 
-   
+from sqlalchemy import Column, Integer, String
+import athanor import BaseModel, StampedMixin, TrackedMixin
+
+class User(BaseModel, StampedMixin):
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False, unique=True)
+
+user = User.create(name='marc')
+
+class Foo(BaseModel, StampedMixin, TrackedMixin):
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False, unique=True)
+
+foo = Foo.create(name='xxx', user=user)
+
+foo.get_by_name('marc')
+foo.stamp(user)
+foo.save()
+
+   #+END_SRC
 
 ** BaseModel
 
@@ -25,9 +45,10 @@
 *** Class Methods and Attributes
 **** .__tablename__
 ***** Description  
-      Table name is automatically computed unless overriden as the
+      Automatically computes __tablename__ unless overriden as the
       plural of the words_with_underscores version of the class name.
       Override if the magic falls on it's face.
+
 ***** Example
       FooBar -> foo_bars
       
@@ -102,8 +123,8 @@
 ** Mixins
 *** StampedMixin
 **** Description
-     modified_on columns to a table. These columns will updated as needed
-     Add StampedMixin to a mapped class to add created_on and
+     StampedMixin adds created_on and modified_on columns to a
+     table. These columns will updated as needed. 
 
 *** TrackedMixin
 **** Description
@@ -124,5 +145,4 @@
    XXX - Document me!
 
 ** Author
-   Marc DellaVolpe
-   marc.dellavolpe@gmail.com
+   Marc DellaVolpe (marc.dellavolpe@gmail.com)

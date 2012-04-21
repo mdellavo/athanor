@@ -2,7 +2,7 @@
                                 ======
 
 Author: marc
-Date: 2012-04-21 18:54:48 EDT
+Date: 2012-04-21 19:04:08 EDT
 
 
 Table of Contents
@@ -37,7 +37,26 @@ Table of Contents
 1.1 Examples 
 =============
 
-   
+
+  from sqlalchemy import Column, Integer, String
+  import athanor import BaseModel, StampedMixin, TrackedMixin
+  
+  class User(BaseModel, StampedMixin):
+      id = Column(Integer, primary_key=True)
+      name = Column(String, nullable=False, unique=True)
+  
+  user = User.create(name='marc')
+  
+  class Foo(BaseModel, StampedMixin, TrackedMixin):
+      id = Column(Integer, primary_key=True)
+      name = Column(String, nullable=False, unique=True)
+  
+  foo = Foo.create(name='xxx', user=user)
+  
+  foo.get_by_name('marc')
+  foo.stamp(user)
+  foo.save()
+
 
 1.2 BaseModel 
 ==============
@@ -53,9 +72,10 @@ Table of Contents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * .__tablename__ 
   + Description 
-    Table name is automatically computed unless overriden as the
+    Automatically computes __tablename__ unless overriden as the
     plural of the words_with_underscores version of the class name.
     Override if the magic falls on it's face.
+    
   + Example 
     FooBar -> foo_bars
     
@@ -140,8 +160,8 @@ Table of Contents
 1.4.1 StampedMixin 
 ~~~~~~~~~~~~~~~~~~~
 * Description 
-  modified_on columns to a table. These columns will updated as needed
-  Add StampedMixin to a mapped class to add created_on and
+  StampedMixin adds created_on and modified_on columns to a
+  table. These columns will updated as needed. 
   
 
 1.4.2 TrackedMixin 
@@ -168,5 +188,4 @@ Table of Contents
 
 1.7 Author 
 ===========
-   Marc DellaVolpe
-   marc.dellavolpe@gmail.com
+   Marc DellaVolpe (marc.dellavolpe@gmail.com)
