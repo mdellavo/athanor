@@ -2,7 +2,7 @@
                                 ======
 
 Author: marc
-Date: 2012-04-21 18:09:19 EDT
+Date: 2012-04-21 18:21:09 EDT
 
 
 Table of Contents
@@ -89,6 +89,7 @@ Table of Contents
   + Example 
     Foo.find_one(and_(Foo.id > 10, Foo.id < 100))
     
+* def create(cls, **data): 
 * def get_or_create(cls, id, data, update=True): 
 * def get_by_or_create(cls, column, value, data, update=True): 
 * def find_or_create(cls, criteria, data, update=True): 
@@ -97,16 +98,19 @@ Table of Contents
 1.2.2 Instance Methods 
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-* def __json__(self): 
-* def update(self, data): 
-* def save(self): 
-* def to_dict(self, include=None, exclude=None): 
 * def __repr__(self): 
+  
 * def columns(self): 
 * def relationships(self): 
 * def primary_key(self): 
 * def attributes(self): 
-* def create(cls, **data): 
+  
+* def to_dict(self, include=None, exclude=None): 
+  
+* def __json__(self): 
+  
+* def update(self, data): 
+* def save(self): 
 * def delete(self): 
   
 
