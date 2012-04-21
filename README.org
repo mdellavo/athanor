@@ -23,7 +23,14 @@
    Many of these utilities are familiar to Django's ORM.
 
 *** Class Methods and Attributes
-
+**** .__tablename__
+***** Description  
+      Table name is automatically computed unless overriden as the
+      plural of the words_with_underscores version of the class name.
+      Override if the magic falls on it's face.
+***** Example
+      FooBar -> foo_bars
+      
 **** .objects
 ***** Description      
       The .objects attribute is query of all objects in the collection
@@ -86,17 +93,27 @@
 **** def save(self):
 **** def delete(self):
 
+** Types
+*** UTCDateTime
+**** Description
+     UTCDateTime will take a time-zone aware datetime and store it as
+     UTC in the database automatically.
+
+** Mixins
+*** StampedMixin
+**** Description
+     Add StampedMixin to a mapped class to add created_on and
+     modified_on columns to a table. These columns will updated as needed
+
+*** TrackedMixin
+   
+
 ** EAV
 
    Provides and Entity-Attribute-Value (aka vertical table) pattern 
 
    XXX - Document me!
 
-** Types
-
-   XXX - Document me!
-
-*** UTCDateTime
 
 ** Shadow
 

@@ -2,7 +2,7 @@
                                 ======
 
 Author: marc
-Date: 2012-04-21 18:21:09 EDT
+Date: 2012-04-21 18:52:18 EDT
 
 
 Table of Contents
@@ -12,11 +12,14 @@ Table of Contents
     1.2 BaseModel
         1.2.1 Class Methods and Attributes
         1.2.2 Instance Methods
-    1.3 EAV
-    1.4 Types
-        1.4.1 UTCDateTime
-    1.5 Shadow
-    1.6 Author
+    1.3 Types
+        1.3.1 UTCDateTime
+    1.4 Mixins
+        1.4.1 StampedMixin
+        1.4.2 TrackedMixin
+    1.5 EAV
+    1.6 Shadow
+    1.7 Author
 
 
 1 Athanor 
@@ -48,7 +51,14 @@ Table of Contents
 
 1.2.1 Class Methods and Attributes 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+* .__tablename__ 
+  + Description 
+    Table name is automatically computed unless overriden as the
+    plural of the words_with_underscores version of the class name.
+    Override if the magic falls on it's face.
+  + Example 
+    FooBar -> foo_bars
+    
 * .objects 
   + Description 
     The .objects attribute is query of all objects in the collection
@@ -114,28 +124,45 @@ Table of Contents
 * def delete(self): 
   
 
-1.3 EAV 
+1.3 Types 
+==========
+
+1.3.1 UTCDateTime 
+~~~~~~~~~~~~~~~~~~
+* Description 
+  UTCDateTime will take a time-zone aware datetime and store it as
+  UTC in the database automatically.
+  
+
+1.4 Mixins 
+===========
+
+1.4.1 StampedMixin 
+~~~~~~~~~~~~~~~~~~~
+* Description 
+  Add StampedMixin to a mapped class to add created_on and
+  modified_on columns to a table. These columns will updated as needed
+  
+
+1.4.2 TrackedMixin 
+~~~~~~~~~~~~~~~~~~~
+   
+
+1.5 EAV 
 ========
 
    Provides and Entity-Attribute-Value (aka vertical table) pattern 
 
    XXX - Document me!
 
-1.4 Types 
-==========
 
-   XXX - Document me!
-
-1.4.1 UTCDateTime 
-~~~~~~~~~~~~~~~~~~
-
-1.5 Shadow 
+1.6 Shadow 
 ===========
 
    XXX - Implement me!
    XXX - Document me!
 
-1.6 Author 
+1.7 Author 
 ===========
    Marc DellaVolpe
    marc.dellavolpe@gmail.com
