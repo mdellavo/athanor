@@ -1,5 +1,8 @@
 # courtesy of http://code.activestate.com/recipes/577781-pluralize-word-convert-singular-word-to-its-plural/
 
+import re
+
+
 ABERRANT_PLURAL_MAP = {
     'appendix': 'appendices',
     'barracks': 'barracks',
@@ -93,3 +96,10 @@ def pluralize(singular):
         suffix = 's'
     plural = root + suffix
     return plural
+
+def underscore(s):
+    return (
+        s[0].lower() + 
+        re.sub(r'([A-Z])', lambda m:"_" + m.group(0).lower(), s[1:])
+    )
+

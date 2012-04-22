@@ -27,9 +27,12 @@ class Foo(BaseModel, StampedMixin, TrackedMixin):
 
 foo = Foo.create(name='xxx', user=user)
 
-foo.get_by_name('marc')
-foo.stamp(user)
-foo.save()
+foo2 = Foo.get_by_name('marc')
+foo2.stamp(user)
+
+print foo2.to_dict()
+
+foo2.save()
 
    #+END_SRC
 

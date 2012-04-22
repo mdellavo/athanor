@@ -4,9 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.ext.declarative import declared_attr, DeclarativeMeta
 
-from athanor.utils import pluralize
-
-import re
+from athanor.utils import pluralize, underscore
 
 Session = scoped_session(sessionmaker())
 
@@ -38,12 +36,7 @@ class BaseModel(object):
         table name."""
         name = cls.__name__
 
-        underscored = (
-            name[0].lower() + 
-            re.sub(r'([A-Z])', lambda m:"_" + m.group(0).lower(), name[1:])
-        )
-
-        return pluralize(underscored)
+        return pluralize(underscore(cls.__name__))
 
     @property
     def columns(self):

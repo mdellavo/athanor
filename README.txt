@@ -2,7 +2,7 @@
                                 ======
 
 Author: marc
-Date: 2012-04-21 19:04:08 EDT
+Date: 2012-04-21 19:05:33 EDT
 
 
 Table of Contents
@@ -53,9 +53,12 @@ Table of Contents
   
   foo = Foo.create(name='xxx', user=user)
   
-  foo.get_by_name('marc')
-  foo.stamp(user)
-  foo.save()
+  foo2 = Foo.get_by_name('marc')
+  foo2.stamp(user)
+  
+  print foo2.to_dict()
+  
+  foo2.save()
 
 
 1.2 BaseModel 
