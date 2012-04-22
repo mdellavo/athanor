@@ -10,31 +10,8 @@
   See Also - http://en.wikipedia.org/wiki/Athanor
 
 ** Examples
-   #+BEGIN_SRC python
 
-from sqlalchemy import Column, Integer, String
-import athanor import BaseModel, StampedMixin, TrackedMixin
-
-class User(BaseModel, StampedMixin):
-    id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False, unique=True)
-
-user = User.create(name='marc')
-
-class Foo(BaseModel, StampedMixin, TrackedMixin):
-    id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False, unique=True)
-
-foo = Foo.create(name='xxx', user=user)
-
-foo2 = Foo.get_by_name('marc')
-foo2.stamp(user)
-
-print foo2.to_dict()
-
-foo2.save()
-
-   #+END_SRC
+   See examples.py
 
 ** BaseModel
 

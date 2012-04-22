@@ -2,7 +2,7 @@
                                 ======
 
 Author: marc
-Date: 2012-04-21 19:05:33 EDT
+Date: 2012-04-22 12:28:16 EDT
 
 
 Table of Contents
@@ -37,29 +37,7 @@ Table of Contents
 1.1 Examples 
 =============
 
-
-  from sqlalchemy import Column, Integer, String
-  import athanor import BaseModel, StampedMixin, TrackedMixin
-  
-  class User(BaseModel, StampedMixin):
-      id = Column(Integer, primary_key=True)
-      name = Column(String, nullable=False, unique=True)
-  
-  user = User.create(name='marc')
-  
-  class Foo(BaseModel, StampedMixin, TrackedMixin):
-      id = Column(Integer, primary_key=True)
-      name = Column(String, nullable=False, unique=True)
-  
-  foo = Foo.create(name='xxx', user=user)
-  
-  foo2 = Foo.get_by_name('marc')
-  foo2.stamp(user)
-  
-  print foo2.to_dict()
-  
-  foo2.save()
-
+   See examples.py
 
 1.2 BaseModel 
 ==============
