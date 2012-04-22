@@ -6,7 +6,8 @@ here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.txt')).read()
 
 requires = [
-    'SQLAlchemy'
+    'SQLAlchemy',
+    'pytz'
 ]
 
 setup(name='athanor',
