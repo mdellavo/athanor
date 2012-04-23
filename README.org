@@ -108,63 +108,89 @@
 
 **** def find_or_create(cls, criteria, data, update=True):
 ***** Description
+      Attempts to fetch an object by given criteria.  If no object
+      is found then an object will be created from the given data
+      dictionary.  If update is True, existing objects will be
+      updated from the data dictionary.
 ***** Returns
+      Returns a tuple of the object and a boolean indicating whether
+      or not it was created.
 ***** Example
+      obj, created = Foo.get_by_or_create(and_(Foo.name=='marc', Foo.active=True), {'name': 'marc', 'user': user})
 
 *** Instance Methods
 
 **** def __repr__(self):
 ***** Description
+      Convenience method to build a simple representation of a mapped
+      instance from the class name and includes the objects primary key(s).
 ***** Returns
+      A string
 ***** Example
+      print foo
 
-**** def columns(self):
+**** .columns:
 ***** Description
-***** Returns
-***** Example
+      A list of an objects column names
 
-**** def relationships(self):
+**** .relationships:
 ***** Description
-***** Returns
-***** Example
+      A list of an objects relationship names
 
-**** def primary_key(self):
+**** .primary_key:
 ***** Description
-***** Returns
-***** Example
+      A list of an object's primary key names
 
-**** def attributes(self):
+**** .attributes:
 ***** Description
-***** Returns
-***** Example
-
+      A list of an object's columns and relationships
 
 **** def to_dict(self, include=None, exclude=None):
 ***** Description
+      Build a dict representation of an object.  Pass a list of field
+      names to include to only includes fields explicitly listed. Pass
+      a list of fields names to exclude to omit fields.  No
+      relationships are traversed, if you want to include
+      relationships, subclass and manually include those fields.
 ***** Returns
+      A dictionary of an object's fields.
 ***** Example
-
+      foo.to_dict(exclude=['id'])
 
 **** def __json__(self):
 ***** Description
+      A method to handle JSON serialization.  A common convention is
+      to call __json__ if such a method exists on an object when
+      converting to JSON. By default calls to_dict().
 ***** Returns
-***** Example
-
+      A dict suitable for serialization.
 
 **** def update(self, data):
 ***** Description
+      Update an object from a dictionary.
 ***** Returns
+      The object updated
 ***** Example
+      foo.update({'name': 'marc'})
 
 **** def save(self):
 ***** Description
+      Commits the session.  This method does not restrict the commit
+      to only the object in question.  This is a simple convenience to
+      make code look a bit more literate at the cost of possible
+      unintentional side effects
 ***** Returns
+      None
 ***** Example
+      foo.save()
 
 **** def delete(self):
 ***** Description
+      Deletes an object
 ***** Returns
+      None
 ***** Example
+      foo.delete()
 
 ** Types
 *** UTCDateTime
@@ -184,5 +210,10 @@
      that relate to a User object.  Use the .touch(user) method to
      update modified_by.
 
+** Todo
+   - tests
+   - ReST docs
+   - A simple makefile
+   
 ** Author
    Marc DellaVolpe (marc.dellavolpe@gmail.com)

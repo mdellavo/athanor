@@ -1,8 +1,8 @@
                                 README
                                 ======
 
-Author: marc
-Date: 2012-04-22 12:28:16 EDT
+Author: Marc DellaVolpe
+Date: 2012-04-23 10:30:35 EDT
 
 
 Table of Contents
@@ -17,9 +17,8 @@ Table of Contents
     1.4 Mixins
         1.4.1 StampedMixin
         1.4.2 TrackedMixin
-    1.5 EAV
-    1.6 Shadow
-    1.7 Author
+    1.5 Todo
+    1.6 Author
 
 
 1 Athanor 
@@ -101,29 +100,127 @@ Table of Contents
     Foo.find_one(and_(Foo.id > 10, Foo.id < 100))
     
 * def create(cls, **data): 
+  + Description 
+    Creates and object from data kwargs, adds it to the session and
+    commits.  Override in subclass if you want to enforce behavior
+    on creation (e.g. If you want to always pass in a created_by user)
+  + Returns 
+    A the created object after it has been committed to the database.
+  + Example 
+    Foo.create(user=user, name='marc')
+    
 * def get_or_create(cls, id, data, update=True): 
+  + Description 
+    Attempts to fetch an object by given primary key.  If no object
+    is found then an object will be created from the given data
+    dictionary.  If update is True, existing objects will be
+    updated from the data dictionary.
+  + Returns 
+    Returns a tuple of the object and a boolean indicating whether
+    or not it was created.
+  + Example 
+    obj, created = Foo.get_or_create(1, {'name': 'marc', 'user': user})
+    
 * def get_by_or_create(cls, column, value, data, update=True): 
+  + Description 
+    Attempts to fetch an object by given column and value.  If no object
+    is found then an object will be created from the given data
+    dictionary.  If update is True, existing objects will be
+    updated from the data dictionary.
+  + Returns 
+    Returns a tuple of the object and a boolean indicating whether
+    or not it was created.
+  + Example 
+    obj, created = Foo.get_by_or_create(Foo.name, 'marc', {'name': 'marc', 'user': user})
+    
 * def find_or_create(cls, criteria, data, update=True): 
-  
+  + Description 
+    Attempts to fetch an object by given criteria.  If no object
+    is found then an object will be created from the given data
+    dictionary.  If update is True, existing objects will be
+    updated from the data dictionary.
+  + Returns 
+    Returns a tuple of the object and a boolean indicating whether
+    or not it was created.
+  + Example 
+    obj, created = Foo.get_by_or_create(and_(Foo.name=='marc', Foo.active=True), {'name': 'marc', 'user': user})
+    
 
 1.2.2 Instance Methods 
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 * def __repr__(self): 
-  
-* def columns(self): 
-* def relationships(self): 
-* def primary_key(self): 
-* def attributes(self): 
-  
+  + Description 
+    Convenience method to build a simple representation of a mapped
+    instance from the class name and includes the objects primary key(s).
+  + Returns 
+    A string
+  + Example 
+    print foo
+    
+* .columns: 
+  + Description 
+    A list of an objects column names
+    
+* .relationships: 
+  + Description 
+    A list of an objects relationship names
+    
+* .primary_key: 
+  + Description 
+    A list of an object's primary key names
+    
+* .attributes: 
+  + Description 
+    A list of an object's columns and relationships
+    
 * def to_dict(self, include=None, exclude=None): 
-  
+  + Description 
+    Build a dict representation of an object.  Pass a list of field
+    names to include to only includes fields explicitly listed. Pass
+    a list of fields names to exclude to omit fields.  No
+    relationships are traversed, if you want to include
+    relationships, subclass and manually include those fields.
+  + Returns 
+    A dictionary of an object's fields.
+  + Example 
+    foo.to_dict(exclude=['id'])
+    
 * def __json__(self): 
-  
+  + Description 
+    A method to handle JSON serialization.  A common convention is
+    to call __json__ if such a method exists on an object when
+    converting to JSON. By default calls to_dict().
+  + Returns 
+    A dict suitable for serialization.
+    
 * def update(self, data): 
+  + Description 
+    Update an object from a dictionary.
+  + Returns 
+    The object updated
+  + Example 
+    foo.update({'name': 'marc'})
+    
 * def save(self): 
+  + Description 
+    Commits the session.  This method does not restrict the commit
+    to only the object in question.  This is a simple convenience to
+    make code look a bit more literate at the cost of possible
+    unintentional side effects
+  + Returns 
+    None
+  + Example 
+    foo.save()
+    
 * def delete(self): 
-  
+  + Description 
+    Deletes an object
+  + Returns 
+    None
+  + Example 
+    foo.delete()
+    
 
 1.3 Types 
 ==========
@@ -153,20 +250,13 @@ Table of Contents
   update modified_by.
   
 
-1.5 EAV 
-========
+1.5 Todo 
+=========
+   - tests
+   - ReST docs
+   - A simple makefile
+   
 
-   Provides and Entity-Attribute-Value (aka vertical table) pattern 
-
-   XXX - Document me!
-
-
-1.6 Shadow 
-===========
-
-   XXX - Implement me!
-   XXX - Document me!
-
-1.7 Author 
+1.6 Author 
 ===========
    Marc DellaVolpe (marc.dellavolpe@gmail.com)
