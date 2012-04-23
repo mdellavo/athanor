@@ -2,7 +2,7 @@
                                 ======
 
 Author: Marc DellaVolpe
-Date: 2012-04-23 10:30:35 EDT
+Date: 2012-04-23 10:33:25 EDT
 
 
 Table of Contents
@@ -14,6 +14,7 @@ Table of Contents
         1.2.2 Instance Methods
     1.3 Types
         1.3.1 UTCDateTime
+        1.3.2 DeclEnum, EnumSymbol
     1.4 Mixins
         1.4.1 StampedMixin
         1.4.2 TrackedMixin
@@ -231,6 +232,13 @@ Table of Contents
   UTCDateTime will take a time-zone aware datetime and store it as
   UTC in the database automatically.
   
+
+1.3.2 DeclEnum, EnumSymbol 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    See [http://techspot.zzzeek.org/2011/01/14/the-enum-recipe/]
+
+    Included here for easy install
+    
 
 1.4 Mixins 
 ===========

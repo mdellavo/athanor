@@ -197,7 +197,12 @@
 **** Description
      UTCDateTime will take a time-zone aware datetime and store it as
      UTC in the database automatically.
+     
+*** DeclEnum, EnumSymbol
+    See http://techspot.zzzeek.org/2011/01/14/the-enum-recipe/
 
+    Included here for easy install
+    
 ** Mixins
 *** StampedMixin
 **** Description
