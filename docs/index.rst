@@ -14,6 +14,10 @@ Contents:
    intro
    tutorial
 
+.. automodule:: athanor
+   :members:
+   :undoc-members:
+
 Indices and tables
 ==================
 
