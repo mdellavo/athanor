@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine, Column, Integer, String
-from athanor import Session, Base, StampedMixin, TrackedMixin
+from athanor import Session, Base, StampedMixin, TrackedMixin, build_eav
 
 class User(Base, StampedMixin):
     id = Column(Integer, primary_key=True)
@@ -12,6 +12,8 @@ class Foo(Base, StampedMixin, TrackedMixin):
 class Tag(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False, unique=True)
+
+FooData = build_eav(Foo)
 
 engine = create_engine('sqlite:///:memory:', echo=True)
 
@@ -34,3 +36,11 @@ print Foo.find_by_created_by(user)
 tag = Tag.create(name='xxx')
 print tag.to_dict()
 print Tag.get_by_name('xxx')
+
+foo.data['x'] = 0
+foo.data['y'] = 1.0
+foo.data['z'] = 'hello'
+
+Session.commit()
+
+print foo.data
