@@ -57,7 +57,6 @@ class BaseModel(object):
 
         o = cls(**kwargs)
         Session.add(o)
-        Session.commit()
         return o
 
     @classmethod
@@ -87,7 +86,7 @@ class BaseModel(object):
         '''Find one object matching criteria.  Returns the object or None'''
 
         try:
-            return cls.find(criteria, orderby).one()
+            return cls.find(criteria, order_by).one()
         except NoResultFound:
             return None
         
